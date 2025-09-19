@@ -11,17 +11,35 @@ function initSpiralGallery() {
     const scrollThreshold = 50;
     let autoRotateInterval;
     let isAutoRotating = true;
-    let horizontalOffset = 0;
 
-    if (!artworks.length || !spiralGallery || !spiralContainer) {
+    // Ensure we use exactly 6 artworks for a cube
+    const facesArtworks = Array.from(artworks).slice(0, 6);
+    if (artworks.length !== 6) {
+        console.warn('Cube gallery expects exactly 6 artworks. Found:', artworks.length, '→ using first 6.');
+        // Hide the rest to avoid layout issues
+        Array.from(artworks).slice(6).forEach(el => {
+            el.style.display = 'none';
+        });
+    }
+
+    if (!facesArtworks.length || !spiralGallery || !spiralContainer) {
         console.error('Missing artworks or gallery elements');
         return;
     }
 
-    // Position artworks in a horizontal line for smooth left-to-right movement
-    artworks.forEach((artwork, index) => {
-        const spacing = 400; // Distance between artworks
-        const xPosition = index * spacing;
+    // Define cube face positions [name, translateX, translateY, translateZ, rotateX, rotateY]
+    const cubeFaces = [
+        { name: 'front',   tx: 0, ty: 0, tz: 300, rx: 0, ry: 0 },
+        { name: 'right',   tx: 300, ty: 0, tz: 0, rx: 0, ry: 90 },
+        { name: 'back',    tx: 0, ty: 0, tz: -300, rx: 0, ry: 180 },
+        { name: 'left',    tx: -300, ty: 0, tz: 0, rx: 0, ry: -90 },
+        { name: 'top',     tx: 0, ty: -300, tz: 0, rx: 90, ry: 0 },
+        { name: 'bottom',  tx: 0, ty: 300, tz: 0, rx: -90, ry: 0 }
+    ];
+
+    // Apply cube face transforms
+    facesArtworks.forEach((artwork, index) => {
+        const face = cubeFaces[index % 6]; // ensure we don't go out of bounds
 
         artwork.style.position = 'absolute';
         artwork.style.width = '300px';
@@ -30,24 +48,30 @@ function initSpiralGallery() {
         artwork.style.top = '50%';
         artwork.style.transform = `
             translate(-50%, -50%)
-            translateX(${xPosition}px)
-            translateZ(0px)
+            translateX(${face.tx}px)
+            translateY(${face.ty}px)
+            translateZ(${face.tz}px)
+            rotateX(${face.rx}deg)
+            rotateY(${face.ry}deg)
         `;
-        artwork.style.opacity = index === 0 ? '1' : '0.4';
+        artwork.style.opacity = '0.3';
         artwork.style.zIndex = '1';
-        artwork.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        artwork.style.transition = 'all 0.8s ease-out';
         artwork.style.transformStyle = 'preserve-3d';
         artwork.style.backfaceVisibility = 'hidden';
-        artwork.style.filter = index === 0 ? 'brightness(1)' : 'brightness(0.6)';
-        artwork.style.scale = index === 0 ? '1' : '0.8';
+        artwork.style.filter = 'brightness(0.6)';
+        artwork.style.scale = '0.7';
         artwork.style.borderRadius = '10px';
         artwork.style.overflow = 'hidden';
     });
 
-    // Show first artwork prominently
-    if (artworks[0]) {
-        artworks[0].classList.add('active');
-        artworks[0].style.zIndex = '10';
+    // Show first face (front) prominently
+    if (facesArtworks[0]) {
+        facesArtworks[0].classList.add('active');
+        facesArtworks[0].style.opacity = '1';
+        facesArtworks[0].style.filter = 'brightness(1)';
+        facesArtworks[0].style.scale = '1';
+        facesArtworks[0].style.zIndex = '10';
     }
 
     // Mouse wheel handler
@@ -70,14 +94,14 @@ function initSpiralGallery() {
 
         if (scrollAccumulator > 0) {
             // Scroll down → next face
-            newIndex = (currentIndex + 1) % artworks.length;
+            newIndex = (currentIndex + 1) % facesArtworks.length;
         } else if (scrollAccumulator < 0) {
             // Scroll up → previous face
-            newIndex = (currentIndex - 1 + artworks.length) % artworks.length;
+            newIndex = (currentIndex - 1 + facesArtworks.length) % facesArtworks.length;
         }
 
         if (newIndex !== currentIndex) {
-            moveToArtwork(newIndex);
+            rotateCube(newIndex);
         }
 
         scrollAccumulator = 0;
@@ -87,47 +111,44 @@ function initSpiralGallery() {
         }, 600); // slightly longer for smoother UX
     }
 
-    // Move to specified artwork with horizontal animation
-    function moveToArtwork(newIndex) {
-        const currentArtwork = artworks[currentIndex];
-        const newArtwork = artworks[newIndex];
+    // Rotate cube to specified face index
+    function rotateCube(newIndex) {
+        const currentArtwork = facesArtworks[currentIndex];
+        const newArtwork = facesArtworks[newIndex];
 
         if (!currentArtwork || !newArtwork) return;
 
-        // Calculate horizontal offset to center the new artwork
-        const spacing = 400;
-        horizontalOffset = -newIndex * spacing;
+        // Get target rotation based on face
+        const targetFace = cubeFaces[newIndex % 6];
+        const currentFace = cubeFaces[currentIndex % 6];
 
         // Animate current face out
-        if (currentArtwork.classList.contains('active')) {
-            anime({
-                targets: currentArtwork,
-                opacity: 0.4,
-                scale: 0.8,
-                filter: 'brightness(0.6)',
-                duration: 400,
-                easing: 'easeInOutQuad',
-                complete: () => {
-                    currentArtwork.classList.remove('active');
-                    currentArtwork.style.zIndex = '1';
-                }
-            });
-        }
-
-        // Animate all artworks to new positions
-        artworks.forEach((artwork, index) => {
-            const spacing = 400;
-            const newXPosition = (index - newIndex) * spacing;
-            
-            anime({
-                targets: artwork,
-                translateX: newXPosition,
-                duration: 800,
-                easing: 'easeOutCubic'
-            });
+        anime({
+            targets: currentArtwork,
+            opacity: 0.2,
+            scale: 0.6,
+            filter: 'brightness(0.4) blur(1px)',
+            duration: 400,
+            easing: 'easeInOutQuad',
+            complete: () => {
+                currentArtwork.classList.remove('active');
+                currentArtwork.style.zIndex = '1';
+            }
         });
 
-        // Highlight new artwork
+        // Animate container to new orientation
+        anime({
+            targets: spiralContainer,
+            rotateX: targetFace.rx,
+            rotateY: targetFace.ry,
+            duration: 800,
+            easing: 'easeOutCubic',
+            complete: () => {
+                spiralContainer.classList.remove('rotating');
+            }
+        });
+
+        // Highlight new face
         setTimeout(() => {
             currentIndex = newIndex;
             newArtwork.classList.add('active');
@@ -137,7 +158,7 @@ function initSpiralGallery() {
                 targets: newArtwork,
                 opacity: 1,
                 scale: 1,
-                filter: 'brightness(1)',
+                filter: 'brightness(1) blur(0px)',
                 duration: 600,
                 delay: 200,
                 easing: 'easeOutBack',
@@ -149,7 +170,7 @@ function initSpiralGallery() {
 
         // Update scroll indicator
         if (scrollIndicator) {
-            const progress = ((currentIndex + 1) / artworks.length) * 100;
+            const progress = ((currentIndex + 1) / facesArtworks.length) * 100;
             const indicatorText = scrollIndicator.querySelector('p');
 
             anime({
@@ -158,7 +179,7 @@ function initSpiralGallery() {
                 duration: 800,
                 easing: 'easeOutCubic',
                 update: function(anim) {
-                    indicatorText.textContent = `Artwork ${currentIndex + 1} of ${artworks.length} • ${Math.round(anim.animatables[0].target.value)}%`;
+                    indicatorText.textContent = `Face ${currentIndex + 1} of ${facesArtworks.length} • ${Math.round(anim.animatables[0].target.value)}%`;
                 }
             });
         }
@@ -175,11 +196,11 @@ function initSpiralGallery() {
 
     // Initialize indicator
     if (scrollIndicator) {
-        scrollIndicator.querySelector('p').textContent = `Artwork 1 of ${artworks.length} • 5%`;
+        scrollIndicator.querySelector('p').textContent = `Face 1 of ${facesArtworks.length} • 5%`;
     }
 
     // Interactive hover/click effects (unchanged from your original)
-    artworks.forEach((artwork, index) => {
+    facesArtworks.forEach((artwork, index) => {
         const artworkInfo = artwork.querySelector('.artwork-info');
 
         artwork.addEventListener('mouseenter', () => {
@@ -262,7 +283,6 @@ function initSpiralGallery() {
     // Ensure container has perspective for 3D effect
     spiralContainer.style.perspective = '1000px';
     spiralContainer.style.transformStyle = 'preserve-3d';
-    spiralContainer.style.overflow = 'hidden';
     
     // Auto-rotation functionality
     function startAutoRotation() {
@@ -270,8 +290,8 @@ function initSpiralGallery() {
         
         autoRotateInterval = setInterval(() => {
             if (!isScrolling && isAutoRotating) {
-                const nextIndex = (currentIndex + 1) % artworks.length;
-                moveToArtwork(nextIndex);
+                const nextIndex = (currentIndex + 1) % facesArtworks.length;
+                rotateCube(nextIndex);
             }
         }, 3000); // Rotate every 3 seconds
     }
@@ -328,16 +348,22 @@ document.addEventListener('DOMContentLoaded', () => {
 // Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Locomotive Scroll first
-    initLocomotiveScroll();
+    if (typeof initLocomotiveScroll === 'function') {
+        initLocomotiveScroll();
+    }
     
     // Initialize spiral gallery
     initSpiralGallery();
     
     // Initialize tab functionality
-    initTabFunctionality();
+    if (typeof initTabFunctionality === 'function') {
+        initTabFunctionality();
+    }
     
     // Initialize other animations
-    initPageAnimations();
+    if (typeof initPageAnimations === 'function') {
+        initPageAnimations();
+    }
 });
 
 // Also initialize on window load as backup

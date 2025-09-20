@@ -85,4 +85,36 @@
 ---
 
 ## 📁 Project Structure
+<img width="559" height="535" alt="image" src="https://github.com/user-attachments/assets/190139fe-4259-43a3-b6a7-55d3d8c78619" />
+
+---
+
+## Clone repository
+git clone https://github.com/Sean-Pereira-945/TSEC-Technopaths-EchoSpace.git
+
+---
+
+**Content Features:**
+- 📸 **20+ Artwork Images** with fallback placeholders
+- 🎭 **7 Artist Profiles** with detailed biographies  
+- 💎 **3 Subscription Tiers** per artist
+- 🎨 **Multiple Art Categories** (paintings, digital, sketches)
+
+---
+
+## 📱 Responsive Design
+
+| Device Type | Features |
+|-------------|----------|
+| **📱 Mobile** | Touch gestures, optimized cube, simplified UI |
+| **📟 Tablet** | Hybrid controls, medium-density layouts |
+| **💻 Desktop** | Full feature set, mouse interactions, keyboard shortcuts |
+
+**Cross-Browser Support:**
+- ✅ Chrome 80+
+- ✅ Firefox 75+  
+- ✅ Safari 13+
+- ✅ Edge 80+
+
+---
 

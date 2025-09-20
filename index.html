@@ -3,16 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Art Gallery - Contemporary Art Collection</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
     <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
-    <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Change "Where Art Meets Innovation" text to black */
+        .hero-title {
+        color: #000000 !important;
+    }
+
+    .hero-title .title-line {
+        color: #000000 !important;
+    }
+
+    .hero-title .title-line.highlight {
+        color: #000000 !important;
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
+        -webkit-text-fill-color: #000000 !important;
+    }
+
+    </style>
 </head>
 <body>
     <div id="loader">
@@ -20,65 +35,134 @@
         <h1>ART</h1>
         <h1>GALLERY</h1>
     </div>
-<div id="fixed-image"></div>
-<div id="full-scr">
-    <div id="full-div1"></div>
-</div>
+    
+    <!-- Artistic Background Elements -->
+    <div class="artistic-bg">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+        <div class="artistic-gradient"></div>
+    </div>
+    
+    <div id="fixed-image"></div>
+    <div id="full-scr">
+        <div id="full-div1"></div>
+    </div>
+    
     <div id="main">
-        <!-- Interactive Spiral Gallery - First Section -->
-        <div id="spiral-gallery">
-            <nav class="spiral-nav">
-                <div class="logo">ArtSpace<span>.</span></div>
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <nav class="main-nav">
+                <div class="logo-container">
+                    <div class="logo">ArtSpace<span>.</span></div>
+                    <div class="logo-subtitle">Contemporary Gallery</div>
+                </div>
                 <div class="nav-links">
-                    <a href="#featured-artists">Featured Artists</a>
-                    <a href="artists.html">All Artists</a>
-                    <a href="login.html">Login</a>
+                    <a href="#featured-artists" class="nav-link">Featured Artists</a>
+                    <a href="artists.html" class="nav-link">All Artists</a>
+                    <a href="login.html" class="nav-link">Login</a>
                 </div>
             </nav>
-            <h2 class="spiral-title">3D Cube Gallery</h2>
+            
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-line">Where Art</span>
+                        <span class="title-line">Meets</span>
+                        <span class="title-line highlight">Innovation</span>
+                    </h1>
+                    <p class="hero-description">Discover contemporary masterpieces from visionary artists around the world. Experience art in a whole new dimension.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick="scrollToSection('spiral-gallery')">Explore Collection</button>
+                        <button class="btn-secondary" onclick="scrollToSection('featured-artists')">Meet Artists</button>
+                    </div>
+                </div>
+                
+                <!-- Stats Counter -->
+               <!--<div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="150">0</span>
+                        <span class="stat-label">Artworks</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="25">0</span>
+                        <span class="stat-label">Artists</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="1000">0</span>
+                        <span class="stat-label">Visitors</span>
+                    </div>
+                </div>-->
+            </div>
+            
+            <div class="scroll-indicator-hero">
+                <div class="scroll-text">Scroll to explore</div>
+                <div class="scroll-arrow-animated">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M12 16l-6-6h12z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Cube Gallery Section (UNCHANGED - only positioned) -->
+        <div id="spiral-gallery" class="gallery-section">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title-modern">Featured Collection</h2>
+                <div class="section-description">
+                    <p>Experience our curated selection through an interactive 3D gallery</p>
+                </div>
+            </div>
+            
             <div class="spiral-container">
                 <div class="artwork" data-artwork="1">
-                    <img src="imgs-painting-scketches/img1.jpg" alt="Painting Sketch 1" onerror="this.src='https://via.placeholder.com/280x350/f0f0f0/333?text=Image+1'">
+                    <img src="imgs-painting-scketches/img1.jpg" alt="Painting Sketch 1" onerror="this.src='https://via.placeholder.com/600x600/f0f0f0/333?text=Image+1'">
                     <div class="artwork-info">
                         <h4>Sketch Study #1</h4>
                         <p>Charcoal on Paper, 2024</p>
                     </div>
                 </div>
                 <div class="artwork" data-artwork="2">
-                    <img src="imgs-painting-scketches/img2.jpg" alt="Painting Sketch 2">
+                    <img src="imgs-painting-scketches/img2.jpg" alt="Painting Sketch 2" onerror="this.src='https://via.placeholder.com/600x600/f0f0f0/333?text=Image+2'">
                     <div class="artwork-info">
                         <h4>Sketch Study #2</h4>
                         <p>Pencil on Paper, 2024</p>
                     </div>
                 </div>
                 <div class="artwork" data-artwork="3">
-                    <img src="imgs-painting-scketches/img3.jpg" alt="Painting Sketch 3">
+                    <img src="imgs-painting-scketches/img3.jpg" alt="Painting Sketch 3" onerror="this.src='https://via.placeholder.com/600x600/f0f0f0/333?text=Image+3'">
                     <div class="artwork-info">
                         <h4>Sketch Study #3</h4>
                         <p>Ink on Paper, 2024</p>
                     </div>
                 </div>
                 <div class="artwork" data-artwork="4">
-                    <img src="imgs-painting-scketches/img4.jpeg" alt="Painting Sketch 4">
+                    <img src="imgs-painting-scketches/img4.jpeg" alt="Painting Sketch 4" onerror="this.src='https://via.placeholder.com/600x600/f0f0f0/333?text=Image+4'">
                     <div class="artwork-info">
                         <h4>Sketch Study #4</h4>
                         <p>Watercolor on Paper, 2024</p>
                     </div>
                 </div>
                 <div class="artwork" data-artwork="5">
-                    <img src="imgs-painting-scketches/img5.jpg" alt="Painting Sketch 5">
+                    <img src="imgs-painting-scketches/img5.jpg" alt="Painting Sketch 5" onerror="this.src='https://via.placeholder.com/600x600/f0f0f0/333?text=Image+5'">
                     <div class="artwork-info">
                         <h4>Sketch Study #5</h4>
                         <p>Mixed Media, 2024</p>
                     </div>
                 </div>
                 <div class="artwork" data-artwork="6">
-                    <img src="imgs-painting-scketches/img6.jpg" alt="Painting Sketch 6">
+                    <img src="imgs-painting-scketches/img6.jpg" alt="Painting Sketch 6" onerror="this.src='https://via.placeholder.com/600x600/f0f0f0/333?text=Image+6'">
                     <div class="artwork-info">
                         <h4>Sketch Study #6</h4>
                         <p>Charcoal on Paper, 2024</p>
                     </div>
                 </div>
+                <!-- Additional artworks remain in HTML but are hidden by JS if more than 6 -->
                 <div class="artwork" data-artwork="7">
                     <img src="imgs-painting-scketches/img7.jpg" alt="Painting Sketch 7">
                     <div class="artwork-info">
@@ -178,81 +262,267 @@
                     </div>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <p>Cube auto-rotates • Scroll to control • Press SPACE to toggle auto-rotation</p>
-                <div class="scroll-arrow">↓</div>
+            
+            <!-- Gallery Controls -->
+            <div class="gallery-controls">
+                <div class="control-info">
+                    <span class="control-text">Scroll to rotate • Space to pause</span>
+                </div>
+                <div class="gallery-progress">
+                    <div class="progress-bar"></div>
+                </div>
             </div>
         </div>
-        <div id="page3">
-           <div id="featured-artists">
-             <h2 class="section-title">Featured Artists</h2>
-             <div id="artists-container">
-                <div class="artist" data-artist="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop">
-                    <div class="overlay"></div>
-                    <h2>Sarah Chen</h2>
-                    <div id="side-char">
-                        <h4>CONTEMPORARY</h4>
-                        <p>Mixed Media Artist</p>
+
+        <!-- Enhanced Featured Artists Section -->
+        <div id="featured-artists" class="artists-section">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title-modern">Featured Artists</h2>
+                <div class="section-description">
+                    <p>Discover the visionary creators behind our contemporary collection</p>
+                </div>
+            </div>
+            
+            <div class="artists-grid-enhanced">
+                <div class="artist-card-modern" onclick="redirectToPortfolio('Sarah Chen')">
+                    <div class="artist-image-container">
+                        <img src="https://imgs.search.brave.com/lMgbdK9sgspV-Uj6oxnEHSkZVa-IPcMyqeMWKmWnYfo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly91dW5h/dGVrLmNvbS9jZG4v/c2hvcC9hcnRpY2xl/cy9OZXJpX094bWFu/X01lcmdpbmdfQmlv/bG9neV9BcmNoaXRl/Y3R1cmVfYW5kX0Rp/Z2l0YWxfRmFicmlj/YXRpb25fZmZkYTlk/OWItNDg3MC00OTk2/LWJiZDktMWY3ZWUw/OTI2NDc2LmpwZz92/PTE3NTIzOTc2MjMm/d2lkdGg9MTEwMA" alt="Sarah Chen" class="artist-image">
+                        <div class="artist-overlay">
+                            <div class="artist-category">CONTEMPORARY</div>
+                            <div class="view-portfolio-btn">View Portfolio</div>
+                        </div>
+                    </div>
+                    <div class="artist-info-modern">
+                        <h3 class="artist-name-modern">Sarah Chen</h3>
+                        <p class="artist-specialty-modern">Mixed Media Artist</p>
+                        <div class="artist-stats-mini">
+                            <span class="stat">42 Works</span>
+                            <span class="stat">1.2k Followers</span>
+                        </div>
                     </div>
                 </div>
-                <div class="artist" data-artist="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop">
-                    <div class="overlay"></div>
-                    <h2>Marcus Rodriguez</h2>
-                    <div id="side-char">
-                        <h4>ABSTRACT</h4>
-                        <p>Oil Painter</p>
+                
+                <div class="artist-card-modern" onclick="redirectToPortfolio('Marcus Rodriguez')">
+                    <div class="artist-image-container">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop" alt="Marcus Rodriguez" class="artist-image">
+                        <div class="artist-overlay">
+                            <div class="artist-category">ABSTRACT</div>
+                            <div class="view-portfolio-btn">View Portfolio</div>
+                        </div>
+                    </div>
+                    <div class="artist-info-modern">
+                        <h3 class="artist-name-modern">Marcus Rodriguez</h3>
+                        <p class="artist-specialty-modern">Oil Painter</p>
+                        <div class="artist-stats-mini">
+                            <span class="stat">38 Works</span>
+                            <span class="stat">980 Followers</span>
+                        </div>
                     </div>
                 </div>
-                <div class="artist" data-artist="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=400&fit=crop">
-                    <div class="overlay"></div>
-                    <h2>Elena Volkov</h2>
-                    <div id="side-char">
-                        <h4>DIGITAL</h4>
-                        <p>Digital Artist</p>
+                
+                <div class="artist-card-modern" onclick="redirectToPortfolio('Elena Volkov')">
+                    <div class="artist-image-container">
+                        <img src="https://imgs.search.brave.com/gP0lyLE_YUt-IqReCYHh4XCRSsw5sO35rvxinb1I630/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9oaXBz/LmhlYXJzdGFwcHMu/Y29tL2htZy1wcm9k/L2ltYWdlcy9ub3Vy/LWJpc2hvdXR5LTY4/M2RkNzQ0ODcxNWIu/cG5nP2Nyb3A9MS4w/MHh3OjAuNzMweGg7/MCwwLjAzOTZ4aCZy/ZXNpemU9MzYwOio" alt="Elena Volkov" class="artist-image">
+                        <div class="artist-overlay">
+                            <div class="artist-category">DIGITAL</div>
+                            <div class="view-portfolio-btn">View Portfolio</div>
+                        </div>
+                    </div>
+                    <div class="artist-info-modern">
+                        <h3 class="artist-name-modern">Elena Volkov</h3>
+                        <p class="artist-specialty-modern">Digital Artist</p>
+                        <div class="artist-stats-mini">
+                            <span class="stat">29 Works</span>
+                            <span class="stat">2.1k Followers</span>
+                        </div>
                     </div>
                 </div>
-                <div class="artist" data-artist="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=400&fit=crop">
-                    <div class="overlay"></div>
-                    <h2>David Kim</h2>
-                    <div id="side-char">
-                        <h4>SCULPTURE</h4>
-                        <p>Installation Artist</p>
+                
+                <div class="artist-card-modern" onclick="redirectToPortfolio('David Kim')">
+                    <div class="artist-image-container">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=400&fit=crop" alt="David Kim" class="artist-image">
+                        <div class="artist-overlay">
+                            <div class="artist-category">SCULPTURE</div>
+                            <div class="view-portfolio-btn">View Portfolio</div>
+                        </div>
+                    </div>
+                    <div class="artist-info-modern">
+                        <h3 class="artist-name-modern">David Kim</h3>
+                        <p class="artist-specialty-modern">Installation Artist</p>
+                        <div class="artist-stats-mini">
+                            <span class="stat">25 Works</span>
+                            <span class="stat">756 Followers</span>
+                        </div>
                     </div>
                 </div>
-                <div class="artist" data-artist="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=400&fit=crop">
-                    <div class="overlay"></div>
-                    <h2>Isabella Torres</h2>
-                    <div id="side-char">
-                        <h4>PHOTOGRAPHY</h4>
-                        <p>Conceptual Photographer</p>
+                
+                <div class="artist-card-modern" onclick="redirectToPortfolio('Isabella Torres')">
+                    <div class="artist-image-container">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=400&fit=crop" alt="Isabella Torres" class="artist-image">
+                        <div class="artist-overlay">
+                            <div class="artist-category">PHOTOGRAPHY</div>
+                            <div class="view-portfolio-btn">View Portfolio</div>
+                        </div>
+                    </div>
+                    <div class="artist-info-modern">
+                        <h3 class="artist-name-modern">Isabella Torres</h3>
+                        <p class="artist-specialty-modern">Conceptual Photographer</p>
+                        <div class="artist-stats-mini">
+                            <span class="stat">33 Works</span>
+                            <span class="stat">1.1k Followers</span>
+                        </div>
                     </div>
                 </div>
-                <div class="artist" data-artist="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=400&fit=crop">
-                    <div class="overlay"></div>
-                    <h2>James Wilson</h2>
-                    <div id="side-char">
-                        <h4>STREET ART</h4>
-                        <p>Muralist</p>
+                
+                <div class="artist-card-modern" onclick="redirectToPortfolio('James Wilson')">
+                    <div class="artist-image-container">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=400&fit=crop" alt="James Wilson" class="artist-image">
+                        <div class="artist-overlay">
+                            <div class="artist-category">STREET ART</div>
+                            <div class="view-portfolio-btn">View Portfolio</div>
+                        </div>
+                    </div>
+                    <div class="artist-info-modern">
+                        <h3 class="artist-name-modern">James Wilson</h3>
+                        <p class="artist-specialty-modern">Muralist</p>
+                        <div class="artist-stats-mini">
+                            <span class="stat">47 Works</span>
+                            <span class="stat">2.3k Followers</span>
+                        </div>
                     </div>
                 </div>
-                <div class="artist" data-artist="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=400&fit=crop">
-                    <div class="overlay"></div>
-                    <h2>Maya Patel</h2>
-                    <div id="side-char">
-                        <h4>WATERCOLOR</h4>
-                        <p>Illustrator</p>
-                    </div>
-                </div>
-             </div>
-           </div>
+            </div>
+            
+            <div class="view-all-artists">
+                <a href="artists.html" class="btn-view-all">
+                    <span>View All Artists</span>
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                    </svg>
+                </a>
+            </div>
         </div>
-   
+
+        <!-- Newsletter Section -->
+        <div class="newsletter-section">
+            <div class="newsletter-content">
+                <h2>Stay Connected</h2>
+                <p>Get the latest updates on new exhibitions, artist features, and gallery events</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" class="newsletter-input">
+                    <button class="newsletter-btn">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="script.js"></script>
-
+    
+    <script>
+        // Redirect function to portfolio page
+        function redirectToPortfolio(artistName) {
+            window.location.href = `portfolio.html?artist=${encodeURIComponent(artistName)}`;
+        }
+        
+        // Smooth scroll function
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Enhanced animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animated counter
+            const animateCounter = (element) => {
+                const target = parseInt(element.dataset.target);
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        element.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 16);
+            };
+            
+            // Trigger counter animation on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counters = entry.target.querySelectorAll('.stat-number');
+                        counters.forEach(counter => animateCounter(counter));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            observer.observe(document.querySelector('.stats-container'));
+            
+            // Enhanced hero animations
+            gsap.timeline()
+                .from('.hero-title .title-line', {
+                    duration: 1.2,
+                    y: 100,
+                    opacity: 0,
+                    stagger: 0.2,
+                    ease: 'power3.out'
+                })
+                .from('.hero-description', {
+                    duration: 1,
+                    y: 30,
+                    opacity: 0,
+                    ease: 'power2.out'
+                }, '-=0.5')
+                .from('.hero-buttons .btn-primary, .hero-buttons .btn-secondary', {
+                    duration: 0.8,
+                    y: 30,
+                    opacity: 0,
+                    stagger: 0.1,
+                    ease: 'power2.out'
+                }, '-=0.3')
+                .from('.stats-container', {
+                    duration: 1,
+                    y: 50,
+                    opacity: 0,
+                    ease: 'power2.out'
+                }, '-=0.5');
+            
+            // Floating shapes animation
+            gsap.to('.shape', {
+                duration: 20,
+                rotation: 360,
+                repeat: -1,
+                ease: 'none',
+                stagger: {
+                    each: 2,
+                    from: 'random'
+                }
+            });
+            
+            gsap.to('.shape', {
+                duration: 15,
+                y: '+=100',
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut',
+                stagger: {
+                    each: 1.5,
+                    from: 'random'
+                }
+            });
+        });
+    </script>
 </body>
 </html>
